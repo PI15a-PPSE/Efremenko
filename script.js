@@ -13,8 +13,8 @@ window.onload = function() {
     //arrays to store the instances
     var pieces = [];
     var tiles = []; 
-
-        //distance formula
+    
+    //distance formula
     var dist = function (x1, y1, x2, y2) {
         return Math.sqrt(Math.pow((x1-x2),2)+Math.pow((y1-y2),2));
     }
@@ -100,6 +100,26 @@ window.onload = function() {
                 }
             }
             return false;
+        };
+        
+        this.opponentJump = function (tile) {
+            var pieceToRemove = this.canOpponentJump(tile.position);
+            //if there is a piece to be removed, remove it
+            if(pieceToRemove) {
+                pieces[pieceIndex].remove();
+                return true;
+            }
+            return false;
+        };
+        
+        this.remove = function () {
+            //remove it and delete it from the gameboard
+            this.element.css("display", "none");
+            if(this.player == 1) $('#player2').append("<div class='capturedPiece'></div>");
+            if(this.player == 2) $('#player1').append("<div class='capturedPiece'></div>");
+            Board.board[this.position[0]][this.position[1]] = 0;
+            //reset position so it doesn't get picked up by the for loop in the canOpponentJump method
+            this.position = [];
         };
     }
 }
