@@ -1,0 +1,60 @@
+//Variables
+$red: #B93848
+$purple: #3A3042
+$blue: #16A8C7
+$dark: #232621
+$light: #F1F1FF
+$fontColor: #333333
+$shadow: 1px 1px 3px $dark
+
+@mixin gamePiece($color, $factor)
+    width: 8vmin * $factor
+    height: 8vmin * $factor
+    background: 
+        color: $color
+        size: 65%
+        repeat: no-repeat
+        position: center
+    border-radius: 6vmin
+    display: inline-block
+    box-sizing: border-box
+    transition: all 0.2s linear
+    //king image from flaticon.com
+
+html, body
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+    margin: 0
+    padding: 0
+    color: $fontColor
+    font-family: 'Lato', Calibri, sans-serif
+    font-size: 16px
+    background:
+        color: $purple
+    
+    h2
+        font-size: 1.3em
+        
+    h3
+        font-size: 1.1em
+        
+    a
+        text-decoration: none
+        color: $fontColor
+        font-weight: 700
+        
+        &:hover
+            text-decoration: underline
+        
+    hr
+        border: 0
+        height: 1px
+        background:
+            color: #333
+            image: linear-gradient(to right, $fontColor, #ccc)
+            
+    .clearfix
+        clear: both
