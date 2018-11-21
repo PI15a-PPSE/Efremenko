@@ -60,5 +60,46 @@ window.onload = function() {
             Board.changePlayerTurn();
             return true;
         };
+        
+        //tests if piece can jump anywhere
+        this.canJumpAny = function () {
+            if(this.canOpponentJump([this.position[0]+2, this.position[1]+2]) ||
+                 this.canOpponentJump([this.position[0]+2, this.position[1]-2]) ||
+                 this.canOpponentJump([this.position[0]-2, this.position[1]+2]) ||
+                 this.canOpponentJump([this.position[0]-2, this.position[1]-2])) {
+                return true;
+            } return false;
+        };
+        
+        //tests if an opponent jump can be made to a specific place
+        this.canOpponentJump = function(newPosition) {
+            //find what the displacement is
+            var dx = newPosition[1] - this.position[1];
+            var dy = newPosition[0] - this.position[0];
+            //make sure object doesn't go backwards if not a king
+            if(this.player == 1 && this.king == false) {
+                if(newPosition[0] < this.position[0]) return false;
+            } else if (this.player == 2 && this.king == false) {
+                if(newPosition[0] > this.position[0]) return false;
+            }
+            //must be in bounds
+            if(newPosition[0] > 7 || newPosition[1] > 7 || newPosition[0] < 0 || newPosition[1] < 0) return false;
+            //middle tile where the piece to be conquered sits
+            var tileToCheckx = this.position[1] + dx/2;
+            var tileToChecky = this.position[0] + dy/2;
+            //if there is a piece there and there is no piece in the space after that
+            if(!Board.isValidPlacetoMove(tileToChecky, tileToCheckx) && Board.isValidPlacetoMove(newPosition[0], newPosition[1])) {
+                //find which object instance is sitting there
+                for(pieceIndex in pieces) {
+                    if(pieces[pieceIndex].position[0] == tileToChecky && pieces[pieceIndex].position[1] == tileToCheckx) {
+                        if(this.player != pieces[pieceIndex].player) {
+                            //return the piece sitting there
+                            return pieces[pieceIndex];
+                        }
+                    }
+                }
+            }
+            return false;
+        };
     }
 }
