@@ -122,7 +122,8 @@ window.onload = function() {
             this.position = [];
         };
     }
-        function Tile (element, position) {
+    
+    function Tile (element, position) {
         //linked DOM element
         this.element = element;
         //position in gameboard
@@ -131,10 +132,10 @@ window.onload = function() {
         this.inRange = function(piece) {
             if(dist(this.position[0], this.position[1], piece.position[0], piece.position[1]) == Math.sqrt(2)) {
                 //regular move
-                return 'jump';
+                return 'regular';
             } else if(dist(this.position[0], this.position[1], piece.position[0], piece.position[1]) == 2*Math.sqrt(2)) {
                 //jump move
-                return 'regular';
+                return 'jump';
             }
         };
     }
