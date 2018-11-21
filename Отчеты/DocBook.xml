@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article version="5.1" xmlns="http://docbook.org/ns/docbook"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         xmlns:xila="http://www.w3.org/2001/XInclude/local-attributes"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:trans="http://docbook.org/ns/transclusion"
+         xmlns:svg="http://www.w3.org/2000/svg"
+         xmlns:m="http://www.w3.org/1998/Math/MathML"
+         xmlns:html="http://www.w3.org/1999/xhtml"
+         xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+    <title>Программный Продукт "Игра Шашки"</title>
+
+    <author>
+      <personname><firstname>Глеб</firstname><surname>Ефременко</surname></personname>
+
+      <affiliation>
+        <orgname>ДонНТУ</orgname>
+      </affiliation>
+    </author>
+
+    <pubdate>21-11-2018</pubdate>
+  </info>
+
+  <section>
+    <title>Описание продукта</title>
+
+    <para>Программный продукт <emphasis role="bold">BlackJack</emphasis>был
+    разработан для развлечения. В игре есть доска 8х8 в котором оба игрока занимают половину.</para>
+  </section>
+
+  <section>
+    <title>Первый запуск</title>
+
+    <para>При первом запуске игры пользователю предоставлена доска и игрок сверху(красный) ходит первый, код выбора шашки предоставлен ниже:</para>
+    
+    <programlisting>$('.piece').on("click", function () {
+        var selected;
+        var isPlayersTurn = ($(this).parent().attr("class").split(' ')[0] == "player"+Board.playerTurn+"pieces");
+        if(isPlayersTurn) {
+            if($(this).hasClass('selected')) selected = true;
+            $('.piece').each(function(index) {$('.piece').eq(index).removeClass('selected')});
+            if(!selected) {
+                $(this).addClass('selected');
+            }
+        }
+    });
+    </programlisting>
+
+    <para>Для того чтобы шашка могла пойти нужно посмотреть, доступен ли ход, проверяется это ниже:</para>
+
+    <programlisting>        this.canJumpAny = function () {
+            if(this.canOpponentJump([this.position[0]+2, this.position[1]+2]) ||
+                 this.canOpponentJump([this.position[0]+2, this.position[1]-2]) ||
+                 this.canOpponentJump([this.position[0]-2, this.position[1]+2]) ||
+                 this.canOpponentJump([this.position[0]-2, this.position[1]-2])) {
+                return true;
+            } return false;
+        };
+    </programlisting>
+
+    <para>В игре присутствует кнопка "Reset Game" производящая рестарт, код ее обработки представлен ниже:</para>
+
+    <programlisting> $('#cleargame').on("click", function () {
+        Board.clear();
+    });
+    </programlisting>
+
+    <para>Таким образом, было рассмотрено 3 варианта развития событий, с
+    приведенным кодом.</para>
+  </section>
+</article>
