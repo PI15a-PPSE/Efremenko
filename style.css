@@ -128,3 +128,46 @@ div.stats #player2 .capturedPiece {
     transition: all 0.2s linear;
     margin: 5px; 
 }
+
+div.stats div.turn {
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to right, #BEEE62 50%, transparent 50%);
+    border-radius: 0 0 3px 3px; 
+}
+
+div.stats button#cleargame {
+    display: block;
+    border: 0;
+    color: #F1F1FF;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px auto 10px;
+    padding: 10px;
+    background-color: #16A8C7;
+    box-shadow: 1px 1px 3px #232621;
+    transition: background-color 0.15s linear; 
+}
+
+div.stats button#cleargame:hover {
+    background-color: #0c5a6b; 
+}
+
+div#board {
+    position: absolute;
+    top: calc(50% - 40vmin);
+    left: calc(50% - 40vmin);
+    width: 80vmin;
+    height: 80vmin;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px #232621;
+    background-color: #B93848;
+    overflow: hidden; 
+}
+
+div#board .tile {
+    width: 10vmin;
+    height: 10vmin;
+    position: absolute;
+    background-color: #232621; 
+}
